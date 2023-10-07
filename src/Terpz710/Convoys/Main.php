@@ -11,8 +11,8 @@ use pocketmine\tile\Chest as ChestTile;
 use pocketmine\math\Vector3;
 use Terpz710\Convoys\Task\CrateSpawnTask;
 use Biswajit\BankNote\BankNote;
-use pocketmine\block\VanillaBlock; // Added use statement
-use pocketmine\item\VanillaItem; // Added use statement
+use pocketmine\block\VanillaBlock;
+use pocketmine\item\VanillaItem;
 
 class Main extends PluginBase {
     private $crateLocations = [];
