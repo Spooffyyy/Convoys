@@ -9,6 +9,7 @@ use pocketmine\block\Block;
 use pocketmine\inventory\ChestInventory;
 use pocketmine\tile\Chest as ChestTile;
 use pocketmine\math\Vector3;
+use Terpz710\Convoys\Task\CrateSpawnTask;
 use Biswajit\BankNote\BankNote;
 
 
