@@ -63,6 +63,7 @@ class Main extends PluginBase {
             $chestInventory->addItem($item);
         } elseif ($item->getId() === Block::GOLDEN_APPLE) {
             $chestInventory->addItem($item);
+            }
         }
     }
 }
