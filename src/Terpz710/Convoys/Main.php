@@ -11,7 +11,8 @@ use pocketmine\tile\Chest as ChestTile;
 use pocketmine\math\Vector3;
 use Terpz710\Convoys\Task\CrateSpawnTask;
 use Biswajit\BankNote\BankNote;
-
+use pocketmine\block\VanillaBlock; // Added use statement
+use pocketmine\item\VanillaItem; // Added use statement
 
 class Main extends PluginBase {
     private $crateLocations = [];
@@ -37,7 +38,7 @@ class Main extends PluginBase {
     }
 
     public function spawnCrateAtLocation(World $world, float $x, float $y, float $z) {
-        $chest = Block::get(Block::CHEST);
+        $chest = VanillaBlock::get(VanillaBlock::CHEST); // Replaced Block::CHEST with VanillaBlock::CHEST
         $world->setBlock(new Vector3($x, $y, $z), $chest, true);
         $tile = $world->getTile(new Vector3($x, $y, $z));
         if ($tile instanceof ChestTile) {
@@ -47,23 +48,23 @@ class Main extends PluginBase {
     }
 
     public function addLootToCrate(ChestInventory $chestInventory) {
-    $bankNotePlugin = $this->getServer()->getPluginManager()->getPlugin("BankNote");
-    if ($bankNotePlugin instanceof BankNote) {
-        $bankNotePlugin->addBankNoteToCrate($chestInventory);
-    } else {
-        $this->getLogger()->warning("BankNote plugin is not installed. Bank notes will not be added to crates.");
-    }
-    
-    $lootTable = $this->getServer()->getLootTableManager()->getLootTable("path/to/custom_loot.json");
-    $lootItems = $lootTable->getRandomItems();
+        $bankNotePlugin = $this->getServer()->getPluginManager()->getPlugin("BankNote");
+        if ($bankNotePlugin instanceof BankNote) {
+            $bankNotePlugin->addBankNoteToCrate($chestInventory);
+        } else {
+            $this->getLogger()->warning("BankNote plugin is not installed. Bank notes will not be added to crates.");
+        }
+        
+        $lootTable = $this->getServer()->getLootTableManager()->getLootTable("path/to/custom_loot.json");
+        $lootItems = $lootTable->getRandomItems();
 
-    foreach ($lootItems as $item) {
-        if ($item->getId() === Block::DIAMOND) {
-            $chestInventory->addItem($item);
-        } elseif ($item->getId() === Block::EMERALD) {
-            $chestInventory->addItem($item);
-        } elseif ($item->getId() === Block::GOLDEN_APPLE) {
-            $chestInventory->addItem($item);
+        foreach ($lootItems as $item) {
+            if ($item->getId() === VanillaItem::DIAMOND) {
+                $chestInventory->addItem($item);
+            } elseif ($item->getId() === VanillaItem::EMERALD) {
+                $chestInventory->addItem($item);
+            } elseif ($item->getId() === VanillaItem::GOLDEN_APPLE) {
+                $chestInventory->addItem($item);
             }
         }
     }
