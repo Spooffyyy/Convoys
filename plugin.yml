@@ -1,0 +1,6 @@
+name: Convoys
+version: 1.0.0
+api: [5.0.0]
+main: Terpz710\Convoys\Main
+author: Terpz710
+description: A PocketMine plugin for spawning loot crates in a specified world.
