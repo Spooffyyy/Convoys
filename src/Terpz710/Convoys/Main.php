@@ -7,12 +7,11 @@ use pocketmine\utils\Config;
 use pocketmine\world\World;
 use pocketmine\block\Block;
 use pocketmine\inventory\ChestInventory;
-use pocketmine\tile\Chest as ChestTile;
 use pocketmine\math\Vector3;
 use Terpz710\Convoys\Task\CrateSpawnTask;
 use Biswajit\BankNote\BankNote;
-use pocketmine\block\VanillaBlock;
 use pocketmine\item\VanillaItem;
+use pocketmine\tile\Chest as TileChest;
 
 class Main extends PluginBase {
     private $crateLocations = [];
@@ -38,10 +37,10 @@ class Main extends PluginBase {
     }
 
     public function spawnCrateAtLocation(World $world, float $x, float $y, float $z) {
-        $chest = VanillaBlock::get(VanillaBlock::CHEST); // Replaced Block::CHEST with VanillaBlock::CHEST
+        $chest = Block::get(Block::CHEST);
         $world->setBlock(new Vector3($x, $y, $z), $chest, true);
         $tile = $world->getTile(new Vector3($x, $y, $z));
-        if ($tile instanceof ChestTile) {
+        if ($tile instanceof TileChest) { // Use TileChest instead of ChestTile
             $tile->pairWith($chest);
             $this->addLootToCrate($tile->getInventory());
         }
@@ -59,11 +58,11 @@ class Main extends PluginBase {
         $lootItems = $lootTable->getRandomItems();
 
         foreach ($lootItems as $item) {
-            if ($item->getId() === VanillaItem::DIAMOND) {
+            if ($item->getId() === VanillaItem::DIAMOND) { // Use VanillaItem instead of Block
                 $chestInventory->addItem($item);
-            } elseif ($item->getId() === VanillaItem::EMERALD) {
+            } elseif ($item->getId() === VanillaItem::EMERALD) { // Use VanillaItem instead of Block
                 $chestInventory->addItem($item);
-            } elseif ($item->getId() === VanillaItem::GOLDEN_APPLE) {
+            } elseif ($item->getId() === VanillaItem::GOLDEN_APPLE) { // Use VanillaItem instead of Block
                 $chestInventory->addItem($item);
             }
         }
